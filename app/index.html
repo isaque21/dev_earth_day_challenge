@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arara Watch - Global Disaster Monitor</title>
+    
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="dashboard">
+        <div class="card">
+            <h2 style="margin-top:0">Arara Watch</h2>
+            <p class="subtitle">Select a location to evaluate extreme weather and geological risks.</p>
+            
+            <div id="map"></div>
+            
+            <div class="search-box">
+                <input type="text" id="city-input" placeholder="Search city or location...">
+                <button class="btn-search" id="btn-search">🔍</button>
+            </div>
+            
+            <button class="btn-main" id="run">Run Risk Analysis (AI)</button>
+        </div>
+
+        <div class="card" id="results" style="display:none;">
+            <h1 id="city-title" style="margin:0">---</h1>
+            <p id="clima-desc" class="subtitle" style="margin:5px 0 20px 0;">---</p>
+            
+            <div class="telemetry">
+                <div class="telemetry-item">
+                    <span class="t-val" id="res-temp">---</span>
+                    <span class="t-label">Temperature</span>
+                </div>
+                <div class="telemetry-item">
+                    <span class="t-val" id="res-humi">---</span>
+                    <span class="t-label">Humidity</span>
+                </div>
+            </div>
+
+            <h3 class="matrix-title">Threat Matrix</h3>
+            <div class="threat-grid" id="grid">
+                </div>
+
+                <h3 class="matrix-title">Ecological Overview</h3>
+            <div class="eco-card" id="eco-overview">
+                <div class="eco-item"><strong>🌿 Vegetation:</strong> <span id="eco-veg">---</span></div>
+                <div class="eco-item"><strong>🏞️ Attractions:</strong> <span id="eco-attract">---</span></div>
+                <div class="eco-item"><strong>🛡️ Conservation:</strong> <span id="eco-cons">---</span></div>
+                <div class="eco-item"><strong>🌍 Ecosystem:</strong> <span id="eco-qual">---</span></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    
+    <script src="script.js"></script>
+</body>
+</html>

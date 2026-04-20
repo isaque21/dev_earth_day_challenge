@@ -1,0 +1,231 @@
+:root { 
+    /* Paleta Earth Day */
+    --bg: #f0fdf4;         /* Verde muito claro (fundo da página) */
+    --card: #ffffff;       /* Branco limpo (fundo dos painéis) */
+    --text: #064e3b;       /* Verde floresta escuro (texto principal) */
+    --muted: #475569;      /* Cinza azulado (textos secundários) */
+    --border: #a7f3d0;     /* Verde menta (bordas) */
+    --accent: #059669;     /* Verde vibrante (botões principais) */
+    --item-bg: #f8fafc;    /* Fundo suave para cards internos */
+}
+
+body { 
+    font-family: 'Inter', sans-serif; 
+    /* Adicionando a imagem de fundo */
+    background-image: url('bg_site.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; /* Efeito parallax suave ao rolar a página */
+    background-color: var(--bg); /* Cor de fallback caso a imagem demore a carregar */
+    
+    color: var(--text); 
+    margin: 0; 
+    padding: 20px; 
+}
+
+.dashboard { 
+    max-width: 1000px; 
+    margin: 0 auto; 
+    display: grid; 
+    gap: 20px; 
+    grid-template-columns: 1fr 2fr; 
+}
+
+.card { 
+    /* Efeito de Vidro (Glassmorphism) */
+    background: rgba(255, 255, 255, 0.85); /* Branco com 85% de opacidade */
+    backdrop-filter: blur(12px); /* Desfoca o fundo atrás do card */
+    -webkit-backdrop-filter: blur(12px); /* Suporte para Safari */
+    
+    padding: 25px; 
+    border-radius: 12px; 
+    border: 1px solid rgba(255, 255, 255, 0.5); /* Borda translúcida */
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1); /* Sombra suave para destacar do fundo */
+}
+
+.card h2, .card h1, .matrix-title {
+    color: #047857; /* Verde título */
+}
+
+.subtitle {
+    color: var(--muted); 
+    font-size: 0.9rem; 
+    margin-bottom: 15px;
+}
+
+#map { 
+    height: 300px; 
+    border-radius: 8px; 
+    margin-bottom: 15px; 
+    border: 2px solid var(--border); 
+    z-index: 1;
+}
+
+.search-box { 
+    display: flex; 
+    gap: 8px; 
+    margin-bottom: 15px; 
+}
+
+.search-box input { 
+    flex: 1; 
+    background: var(--item-bg); 
+    border: 1px solid var(--border); 
+    padding: 12px; 
+    border-radius: 6px; 
+    color: var(--text); 
+    outline: none; 
+    font-weight: 500;
+}
+
+.search-box input:focus { 
+    border-color: var(--accent); 
+    box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.2);
+}
+
+.btn-search { 
+    background: var(--accent); 
+    color: white; 
+    border: none; 
+    padding: 0 15px; 
+    border-radius: 6px; 
+    cursor: pointer; 
+    transition: 0.2s; 
+}
+
+.btn-search:hover { 
+    background: #047857; 
+}
+
+.btn-main { 
+    background: var(--accent); 
+    color: white; 
+    border: none; 
+    padding: 15px; 
+    border-radius: 8px; 
+    width: 100%; 
+    font-weight: bold; 
+    cursor: pointer; 
+    transition: 0.2s; 
+    box-shadow: 0 4px 6px -1px rgba(5, 150, 105, 0.3);
+}
+
+.btn-main:hover { 
+    background: #047857; 
+    transform: translateY(-1px);
+}
+
+.btn-main:disabled { 
+    background: #94a3b8; 
+    cursor: wait; 
+    box-shadow: none;
+    transform: none;
+}
+
+.telemetry { 
+    display: flex; 
+    gap: 20px; 
+    margin-top: 15px; 
+}
+
+.telemetry-item { 
+    flex: 1; 
+    text-align: center; 
+    background: var(--item-bg); 
+    padding: 15px; 
+    border-radius: 8px; 
+    border: 1px solid var(--border); 
+}
+
+.t-val { 
+    font-size: 1.8rem; 
+    font-weight: 900; 
+    color: #0284c7; /* Azul Oceano para os dados climáticos */
+    display: block; 
+}
+
+.t-label { 
+    font-size: 0.8rem; 
+    color: var(--muted); 
+    text-transform: uppercase; 
+    font-weight: 600;
+}
+
+.matrix-title {
+    margin-top: 30px; 
+    border-bottom: 2px solid var(--border); 
+    padding-bottom: 10px;
+}
+
+.threat-grid { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+    gap: 15px; 
+    margin-top: 20px; 
+}
+
+.threat-card { 
+    padding: 15px; 
+    border-radius: 8px; 
+    background: var(--item-bg); 
+    border: 1px solid var(--border);
+    border-left: 5px solid gray; 
+}
+
+.threat-header { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    font-weight: bold; 
+    margin-bottom: 5px; 
+    color: var(--text);
+}
+
+.threat-reason { 
+    font-size: 0.85rem; 
+    color: var(--muted); 
+    line-height: 1.4; 
+}
+
+/* Status Colors (Ajustadas para fundo claro) */
+.LOW { border-left-color: #10b981; } 
+.LOW .badge { background: #d1fae5; color: #065f46; }
+
+.MEDIUM { border-left-color: #f59e0b; } 
+.MEDIUM .badge { background: #fef3c7; color: #92400e; }
+
+.HIGH { border-left-color: #ef4444; } 
+.HIGH .badge { background: #fee2e2; color: #b91c1c; }
+
+.badge { 
+    padding: 4px 8px; 
+    border-radius: 4px; 
+    font-size: 0.75rem; 
+    font-weight: bold; 
+}
+
+/* Ecological Overview Card */
+.eco-card {
+    background: #f0fdfa; /* Azul/Verde muito suave */
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.eco-item {
+    font-size: 0.95rem;
+    color: var(--text);
+    line-height: 1.5;
+}
+
+.eco-item strong {
+    color: #059669; /* Verde destaque para os ícones/títulos */
+}
+
+@media (max-width: 768px) { 
+    .dashboard { grid-template-columns: 1fr; } 
+}
