@@ -16,7 +16,7 @@ variable "project_name" {
 
 variable "gemini_model" {
   description = "Versão do modelo do Google Gemini a ser utilizada"
-  default     = "gemini-2.5-flash"
+  default     = "gemini-3.1-flash-lite-preview"
 }
 
 variable "openweathermap_api_key" {

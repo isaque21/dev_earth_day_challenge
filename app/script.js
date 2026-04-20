@@ -9,6 +9,25 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 let marker = L.marker([-21.7545, -43.3504]).addTo(map);
 let currentCoords = { lat: -21.7545, lon: -43.3504 };
 
+function buildAnalysisErrorMessage(response, data) {
+    if (response.status === 429) {
+        const retryAfter = data?.retry_after_seconds;
+        return retryAfter
+            ? `AI request limit reached. Please try again in about ${retryAfter} second(s).`
+            : "AI request limit reached for the current Gemini quota. Please try again later.";
+    }
+
+    if (response.status === 503) {
+        return "The AI model is temporarily overloaded. Please try again in a few moments.";
+    }
+
+    if (data?.error) {
+        return data.error;
+    }
+
+    return "Failed to process analysis.";
+}
+
 // Busca de cidades via Nominatim
 async function searchCity() {
     const query = document.getElementById('city-input').value;
@@ -53,6 +72,14 @@ document.getElementById('run').onclick = async () => {
         });
         const d = await response.json();
 
+        if (!response.ok) {
+            throw new Error(buildAnalysisErrorMessage(response, d));
+        }
+
+        if (!d.location || !d.riscos) {
+            throw new Error("The analysis response was incomplete.");
+        }
+
         // Atualização da UI (Textos Principais)
         document.getElementById('city-title').innerText = d.location;
         document.getElementById('clima-desc').innerText = d.climate_desc;
@@ -95,7 +122,7 @@ document.getElementById('run').onclick = async () => {
 
     } catch (e) {
         console.error(e);
-        alert("Failed to process analysis.");
+        alert(e.message || "Failed to process analysis.");
     } finally {
         btn.disabled = false;
         btn.innerText = "Run Risk Analysis (AI)";
